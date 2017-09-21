@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="vue.min.js"></script>
+    <script src="one.js"></script>
+    <title>test</title>
+</head>
+<body>
+<div class="container" id="divone">
+
+<form action="get" role="form">
+<div class="form-group">
+    <label for="name">这里输入名字</label>
+    <input type="text" class="form-control" id="name" v-model="username" placeholder="输入你的名字....">
+</div>
+    <div class="form-group">
+        <laber for="age" >这里输入年龄</laber>
+        <input type="text" class="form-control" id="age" v-model="userage" placeholder="输入你的年龄.....">
+    </div>
+    <div class="form-group">
+        <input type="button" value="添加" class="btn btn-info" v-on:click="add()">
+        <input type="reset" value="重置" class="btn btn-danger">
+    </div>
+</form>
+<table class="table table-bordered table-responsive">
+    <tr class="text-center">
+        <th class="text-center">number</th>
+        <th class="text-center">name</th>
+        <th class="text-center">age</th>
+        <th class="text-center">操作</th>
+    </tr>
+    <tr class="text-center" v-for="(value,key) in myData">
+        <td>{{key+1}}</td>
+        <td>{{value.name}}</td>
+        <td>{{value.age}}</td>
+        <td>
+            <button class="btn btn-danger" data-toggle="modal" data-target="#delete" v-on:click="nowIndex=key">删除</button>
+        </td>
+    </tr>
+    <tr v-if="myData.length!=0">
+        <td colspan="4" class="text-right">
+            <button class="btn-danger" data-toggle="modal" data-target="#delete" v-on:click="nowIndex=-2">
+                删除全部
+            </button>
+        </td>
+    </tr>
+    <tr class="text-center" v-if="myData.length==0">
+        <td colspan="4"><p>没有内容显示。、。</p></td>
+    </tr>
+</table>
+<div  role="dialog" class="modal fade" id="delete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal" aria-hidden="true"><span>&times;</span></button>
+                <h3 class="modal-title text-center">Are you sure?</h3>
+            </div>
+            <div class="modal-body text-center">
+                <button class="btn-danger" data-dismiss="modal" v-on:click="deleteMsg(nowIndex)">确定</button>
+                <button class="btn-info" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>
